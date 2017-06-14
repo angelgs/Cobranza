@@ -7,11 +7,14 @@ package com.cobranza.model;
 public enum TipoPersona
 {
     CLIENTE("CLIENTE"),
-    AVAL("AVAL");
+    REFERENCIA("REFERENCIA");
 
     final String tipo;
 
-    private TipoPersona(final String tipo) { this.tipo = tipo; }
+    TipoPersona(final String tipo)
+    {
+        this.tipo = tipo;
+    }
 
     public String toString() { return tipo; }
 }

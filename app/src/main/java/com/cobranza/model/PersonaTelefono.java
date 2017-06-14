@@ -1,8 +1,9 @@
 package com.cobranza.model;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.NotNull;
 
 /**
  * Created by agutierrs on 24/05/17.
@@ -14,10 +15,16 @@ class PersonaTelefono
     @Id(autoincrement = true)
     private Long id;
 
+    @NotNull
     private Long personaId;
+
+    @NotNull
     private Long telefonoId;
-    @Generated(hash = 1788061929)
-    public PersonaTelefono(Long id, Long personaId, Long telefonoId) {
+
+    @Generated(hash = 1759738988)
+    public PersonaTelefono(Long id, @NotNull Long personaId,
+                           @NotNull Long telefonoId)
+    {
         this.id = id;
         this.personaId = personaId;
         this.telefonoId = telefonoId;

@@ -1,14 +1,13 @@
 package com.cobranza.model;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.ToOne;
 
 import java.util.Date;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 
 /**
  * Created by agutierrs on 21/05/17.
@@ -43,6 +42,8 @@ public class Pago
     /** Used for active entity operations. */
     @Generated(hash = 435262577)
     private transient PagoDao myDao;
+    @Generated(hash = 1127129734)
+    private transient Long contrato__resolvedKey;
 
     @Generated(hash = 40570290)
     public Pago(Long id, @NotNull Long idCobrador, @NotNull Date fecha,
@@ -106,9 +107,6 @@ public class Pago
     public void setContratoId(Long contratoId) {
         this.contratoId = contratoId;
     }
-
-    @Generated(hash = 1127129734)
-    private transient Long contrato__resolvedKey;
 
     /** To-one relationship, resolved on first access. */
     @Generated(hash = 207467265)

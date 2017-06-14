@@ -1,7 +1,10 @@
 package com.cobranza.model;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.OrderBy;
 import org.greenrobot.greendao.annotation.ToMany;
@@ -9,8 +12,6 @@ import org.greenrobot.greendao.annotation.ToOne;
 
 import java.util.Date;
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 
 /**
  * Created by agutierrs on 21/05/17.
@@ -33,11 +34,25 @@ public class Contrato
     @NotNull
     private Date fecha;
 
+    @NotNull
     private double monto;
 
+    @NotNull
     private double saldo;
 
+    @NotNull
     private double montoLiquidar;
+
+    @NotNull
+    private String direccion;
+
+    @ToMany
+    @JoinEntity(
+            entity = ContratoPersona.class,
+            sourceProperty = "contratoId",
+            targetProperty = "personaId"
+    )
+    private List<Persona> referencias;
 
     @ToMany(referencedJoinProperty = "contratoId")
     private List<Articulo> articulos;
@@ -46,11 +61,6 @@ public class Contrato
     @OrderBy("fechaPago ASC")
     private List<Pago> pagos;
 
-    private Long avalId;
-
-    @ToOne(joinProperty = "avalId")
-    private Persona aval;
-
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
@@ -58,10 +68,13 @@ public class Contrato
     /** Used for active entity operations. */
     @Generated(hash = 1829289339)
     private transient ContratoDao myDao;
+    @Generated(hash = 1668724671)
+    private transient Long cliente__resolvedKey;
 
-    @Generated(hash = 1308739639)
+    @Generated(hash = 26986732)
     public Contrato(Long id, @NotNull String numero, Long clienteId, @NotNull Date fecha, double monto,
-            double saldo, double montoLiquidar, Long avalId) {
+                    double saldo, double montoLiquidar, @NotNull String direccion)
+    {
         this.id = id;
         this.numero = numero;
         this.clienteId = clienteId;
@@ -69,7 +82,7 @@ public class Contrato
         this.monto = monto;
         this.saldo = saldo;
         this.montoLiquidar = montoLiquidar;
-        this.avalId = avalId;
+        this.direccion = direccion;
     }
 
     @Generated(hash = 1339756915)
@@ -124,12 +137,6 @@ public class Contrato
         this.saldo = saldo;
     }
 
-    @Generated(hash = 1668724671)
-    private transient Long cliente__resolvedKey;
-
-    @Generated(hash = 867770404)
-    private transient Long aval__resolvedKey;
-
     /** To-one relationship, resolved on first access. */
     @Generated(hash = 9301335)
     public Persona getCliente() {
@@ -147,6 +154,19 @@ public class Contrato
             }
         }
         return cliente;
+    }
+
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 1887176634)
+    public void setCliente(Persona cliente)
+    {
+        synchronized (this) {
+            this.cliente = cliente;
+            clienteId = cliente == null ? null : cliente.getId();
+            cliente__resolvedKey = clienteId;
+        }
     }
 
     /**
@@ -241,59 +261,56 @@ public class Contrato
         myDao.update(this);
     }
 
-    public Long getAvalId() {
-        return this.avalId;
+    public double getMontoLiquidar()
+    {
+        return this.montoLiquidar;
     }
 
-    public void setAvalId(Long avalId) {
-        this.avalId = avalId;
+    public void setMontoLiquidar(double montoLiquidar)
+    {
+        this.montoLiquidar = montoLiquidar;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1887176634)
-    public void setCliente(Persona cliente) {
-        synchronized (this) {
-            this.cliente = cliente;
-            clienteId = cliente == null ? null : cliente.getId();
-            cliente__resolvedKey = clienteId;
-        }
+    public String getDireccion()
+    {
+        return this.direccion;
     }
 
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1669051112)
-    public Persona getAval() {
-        Long __key = this.avalId;
-        if (aval__resolvedKey == null || !aval__resolvedKey.equals(__key)) {
+    public void setDireccion(String direccion)
+    {
+        this.direccion = direccion;
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 1119562186)
+    public List<Persona> getReferencias()
+    {
+        if (referencias == null) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             PersonaDao targetDao = daoSession.getPersonaDao();
-            Persona avalNew = targetDao.load(__key);
+            List<Persona> referenciasNew = targetDao._queryContrato_Referencias(id);
             synchronized (this) {
-                aval = avalNew;
-                aval__resolvedKey = __key;
+                if (referencias == null) {
+                    referencias = referenciasNew;
+                }
             }
         }
-        return aval;
+        return referencias;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1046484695)
-    public void setAval(Persona aval) {
-        synchronized (this) {
-            this.aval = aval;
-            avalId = aval == null ? null : aval.getId();
-            aval__resolvedKey = avalId;
-        }
-    }
-
-    public double getMontoLiquidar() {
-        return this.montoLiquidar;
-    }
-
-    public void setMontoLiquidar(double montoLiquidar) {
-        this.montoLiquidar = montoLiquidar;
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
+    @Generated(hash = 170618034)
+    public synchronized void resetReferencias()
+    {
+        referencias = null;
     }
 
     /** called by internal mechanisms, do not call yourself. */

@@ -1,17 +1,16 @@
 package com.cobranza.model;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToMany;
-import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.converter.PropertyConverter;
 
 import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 
 /**
  * Created by agutierrs on 24/05/17.
@@ -26,10 +25,8 @@ public class Persona
     @NotNull
     protected String nombre;
 
-    private Long direccionId;
-
-    @ToOne(joinProperty = "direccionId")
-    private Direccion direccion;
+    @NotNull
+    private String direccion;
 
     @ToMany
     @JoinEntity(
@@ -41,6 +38,9 @@ public class Persona
 
     @Convert(converter = TipoPersonaConverter.class, columnType = String.class)
     private TipoPersona tipoPersona;
+
+    @NotNull
+    private Boolean esAval = Boolean.FALSE;
 
     @ToMany(referencedJoinProperty = "clienteId")
     private List<Contrato> contratos;
@@ -54,12 +54,15 @@ public class Persona
     private transient PersonaDao myDao;
 
 
-    @Generated(hash = 837512235)
-    public Persona(Long id, @NotNull String nombre, Long direccionId, TipoPersona tipoPersona) {
+    @Generated(hash = 545191834)
+    public Persona(Long id, @NotNull String nombre, @NotNull String direccion, TipoPersona tipoPersona,
+                   @NotNull Boolean esAval)
+    {
         this.id = id;
         this.nombre = nombre;
-        this.direccionId = direccionId;
+        this.direccion = direccion;
         this.tipoPersona = tipoPersona;
+        this.esAval = esAval;
     }
 
 
@@ -88,16 +91,6 @@ public class Persona
     }
 
 
-    public Long getDireccionId() {
-        return this.direccionId;
-    }
-
-
-    public void setDireccionId(Long direccionId) {
-        this.direccionId = direccionId;
-    }
-
-
     public TipoPersona getTipoPersona() {
         return this.tipoPersona;
     }
@@ -105,41 +98,6 @@ public class Persona
 
     public void setTipoPersona(TipoPersona tipoPersona) {
         this.tipoPersona = tipoPersona;
-    }
-
-
-    @Generated(hash = 2117566951)
-    private transient Long direccion__resolvedKey;
-
-
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1208985994)
-    public Direccion getDireccion() {
-        Long __key = this.direccionId;
-        if (direccion__resolvedKey == null || !direccion__resolvedKey.equals(__key)) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            DireccionDao targetDao = daoSession.getDireccionDao();
-            Direccion direccionNew = targetDao.load(__key);
-            synchronized (this) {
-                direccion = direccionNew;
-                direccion__resolvedKey = __key;
-            }
-        }
-        return direccion;
-    }
-
-
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 691962620)
-    public void setDireccion(Direccion direccion) {
-        synchronized (this) {
-            this.direccion = direccion;
-            direccionId = direccion == null ? null : direccion.getId();
-            direccion__resolvedKey = direccionId;
-        }
     }
 
 
@@ -239,6 +197,27 @@ public class Persona
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public String getDireccion()
+    {
+        return this.direccion;
+    }
+
+    public void setDireccion(String direccion)
+    {
+        this.direccion = direccion;
+    }
+
+    public Boolean getEsAval()
+    {
+        return this.esAval;
+    }
+
+
+    public void setEsAval(Boolean esAval)
+    {
+        this.esAval = esAval;
     }
 
 
