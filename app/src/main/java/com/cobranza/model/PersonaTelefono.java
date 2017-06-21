@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.NotNull;
  */
 
 @Entity
-class PersonaTelefono
+public class PersonaTelefono
 {
     @Id(autoincrement = true)
     private Long id;

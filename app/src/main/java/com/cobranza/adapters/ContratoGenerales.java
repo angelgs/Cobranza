@@ -12,6 +12,11 @@ import android.widget.TextView;
 
 import com.cobranza.R;
 import com.cobranza.model.Contrato;
+import com.cobranza.model.Telefono;
+
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,14 +28,9 @@ import com.cobranza.model.Contrato;
  */
 public class ContratoGenerales extends Fragment
 {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    final DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+    final NumberFormat format = NumberFormat.getCurrencyInstance();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private Contrato contrato;
 
     private OnFragmentInteractionListener mListener;
@@ -53,10 +53,6 @@ public class ContratoGenerales extends Fragment
         ContratoGenerales fragment = new ContratoGenerales();
         fragment.setContrato(contrato);
 
-        /*Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);*/
         return fragment;
     }
 
@@ -69,10 +65,6 @@ public class ContratoGenerales extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -82,9 +74,26 @@ public class ContratoGenerales extends Fragment
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_contrato_generales, container, false);
 
+        StringBuilder sb = new StringBuilder();
+        List<Telefono> telefonos = contrato.getCliente().getTelefonos();
+        for (Telefono telefono : telefonos) {
+            sb.append(String.format("%s: %s\n", telefono.getTipo(), telefono.getNumero()));
+        }
+
+        ((TextView) rootView.findViewById(R.id.numeroCuenta)).setText(contrato.getNumeroCuenta());
+        ((TextView) rootView.findViewById(R.id.contrato)).setText(contrato.getNumero());
         ((TextView) rootView.findViewById(R.id.nombre)).setText(contrato.getCliente().getNombre());
         ((TextView) rootView.findViewById(R.id.direccion)).setText(contrato.getCliente().getDireccion());
-
+        ((TextView) rootView.findViewById(R.id.telefono)).setText(sb.toString());
+        ((TextView) rootView.findViewById(R.id.noPago)).setText(contrato.getPago());
+        ((TextView) rootView.findViewById(R.id.montoAbono)).setText(format.format(contrato.getMontoPago()));
+        ((TextView) rootView.findViewById(R.id.total)).setText(format.format(contrato.getMonto()));
+        ((TextView) rootView.findViewById(R.id.pagosAtrazados)).setText(String.valueOf(contrato.getPagosAtrazados()));
+        ((TextView) rootView.findViewById(R.id.cargoInteres)).setText(format.format(contrato.getCargoInteres()));
+        ((TextView) rootView.findViewById(R.id.otrosCargos)).setText(format.format(contrato.getOtrosCargos()));
+        ((TextView) rootView.findViewById(R.id.motivoOtrosCargos)).setText(contrato.getMotivoOtrosCargos());
+        ((TextView) rootView.findViewById(R.id.saldo)).setText(format.format(contrato.getSaldo()));
+        ((TextView) rootView.findViewById(R.id.aviso)).setText(contrato.getAviso());
 
         return rootView;
     }

@@ -8,7 +8,10 @@ import android.support.test.runner.AndroidJUnit4;
 import com.cobranza.model.DaoMaster;
 import com.cobranza.model.DaoSession;
 import com.cobranza.model.Persona;
+import com.cobranza.model.PersonaTelefono;
+import com.cobranza.model.Telefono;
 import com.cobranza.model.TipoPersona;
+import com.cobranza.model.TipoTelefono;
 
 import org.greenrobot.greendao.database.Database;
 import org.junit.After;
@@ -69,6 +72,12 @@ public class PersonaDaoInstrumentedTest
 
         String direccion = sb.toString();
 
+        Telefono tel1 = new Telefono();
+        tel1.setTipo(TipoTelefono.CASA);
+        tel1.setAlias("Casa");
+        tel1.setNumero("5553898989");
+        long idTel1 = daoSession.getTelefonoDao().insert(tel1);
+
         Persona persona = new Persona();
         persona.setId(3l);
         persona.setNombre("Test cliente");
@@ -78,6 +87,11 @@ public class PersonaDaoInstrumentedTest
 
         daoSession.getPersonaDao().insert(persona);
 
+        PersonaTelefono personaTelefono = new PersonaTelefono();
+        personaTelefono.setPersonaId(3l);
+        personaTelefono.setTelefonoId(idTel1);
+        daoSession.getPersonaTelefonoDao().insert(personaTelefono);
+
         List<Persona> personas = daoSession.getPersonaDao().loadAll();
 
         Assert.assertFalse(personas.isEmpty());
@@ -85,6 +99,9 @@ public class PersonaDaoInstrumentedTest
 
         persona = daoSession.getPersonaDao().load(3l);
         Assert.assertNotNull(persona);
+
+        Assert.assertTrue(persona.getTelefonos().size() > 0);
+
     }
 
     @Test

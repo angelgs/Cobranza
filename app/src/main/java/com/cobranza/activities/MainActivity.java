@@ -33,7 +33,10 @@ import com.cobranza.model.DaoSession;
 import com.cobranza.model.Pago;
 import com.cobranza.model.PagoDao;
 import com.cobranza.model.Persona;
+import com.cobranza.model.PersonaTelefono;
+import com.cobranza.model.Telefono;
 import com.cobranza.model.TipoPersona;
+import com.cobranza.model.TipoTelefono;
 
 import org.greenrobot.greendao.query.Query;
 
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements ContratoAdapter.C
 
 
         actualizarLista();
-
+/*
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -195,41 +198,42 @@ public class MainActivity extends AppCompatActivity implements ContratoAdapter.C
                     Toast.LENGTH_LONG).show();
             finish();
         }
-
+*/
     }
 
-    @Override
-    public void onStart()
-    {
-        super.onStart();
+    /*
+        @Override
+        public void onStart()
+        {
+            super.onStart();
 
-        // If Bluetooth is not on, request that it be enabled.
-        // setupChat() will then be called during onActivityResult
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-            // Otherwise, setup the session
-        } else {
-            if (mService == null)
-                mService = new BluetoothService(this, mHandler);
-        }
-    }
-
-    @Override
-    public synchronized void onResume()
-    {
-        super.onResume();
-
-        if (mService != null) {
-
-            if (mService.getState() == BluetoothService.STATE_NONE) {
-                // Start the Bluetooth services
-                mService.start();
+            // If Bluetooth is not on, request that it be enabled.
+            // setupChat() will then be called during onActivityResult
+            if (!mBluetoothAdapter.isEnabled()) {
+                Intent enableIntent = new Intent(
+                        BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+                // Otherwise, setup the session
+            } else {
+                if (mService == null)
+                    mService = new BluetoothService(this, mHandler);
             }
         }
-    }
 
+        @Override
+        public synchronized void onResume()
+        {
+            super.onResume();
+
+            if (mService != null) {
+
+                if (mService.getState() == BluetoothService.STATE_NONE) {
+                    // Start the Bluetooth services
+                    mService.start();
+                }
+            }
+        }
+    */
     private void fillDatabase()
     {
         StringBuilder sb = new StringBuilder();
@@ -237,6 +241,19 @@ public class MainActivity extends AppCompatActivity implements ContratoAdapter.C
         sb.append("Guadalupe Proletaria\n");
         sb.append("Gustavo A. Madero, 07670 CDMX \n");
         sb.append("entre av. 28 y av. Guadalupe");
+
+        Telefono tel1 = new Telefono();
+        tel1.setTipo(TipoTelefono.CASA);
+        tel1.setAlias("Casa");
+        tel1.setNumero("5553898989");
+
+        Telefono tel2 = new Telefono();
+        tel2.setTipo(TipoTelefono.CELULAR);
+        tel2.setAlias("Cell");
+        tel2.setNumero("5554150761");
+
+        long idTel1 = daoSession.getTelefonoDao().insert(tel1);
+        long idTel2 = daoSession.getTelefonoDao().insert(tel2);
 
         Persona cliente = new Persona();
         cliente.setId(1L);
@@ -261,6 +278,16 @@ public class MainActivity extends AppCompatActivity implements ContratoAdapter.C
         daoSession.getPersonaDao().insert(cliente);
         daoSession.getPersonaDao().insert(referencia);
 
+        PersonaTelefono personaTelefono = new PersonaTelefono();
+        personaTelefono.setPersonaId(1L);
+        personaTelefono.setTelefonoId(idTel1);
+        daoSession.getPersonaTelefonoDao().insert(personaTelefono);
+
+        personaTelefono = new PersonaTelefono();
+        personaTelefono.setPersonaId(2L);
+        personaTelefono.setTelefonoId(idTel2);
+        daoSession.getPersonaTelefonoDao().insert(personaTelefono);
+
         Contrato contrato = new Contrato();
         contrato.setId(1L);
         contrato.setNumero("0823728372");
@@ -270,6 +297,12 @@ public class MainActivity extends AppCompatActivity implements ContratoAdapter.C
         contrato.setMonto(10000.00);
         contrato.setSaldo(5000.00);
         contrato.setMontoLiquidar(3000.00);
+        contrato.setNumeroCuenta("2329832932");
+        contrato.setOtrosCargos(0.00);
+        contrato.setCargoInteres(0.00);
+        contrato.setPagosAtrazados(0);
+        contrato.setPago("06/10");
+        contrato.setMontoPago(1000.00);
 
         daoSession.getContratoDao().insert(contrato);
 
@@ -298,6 +331,16 @@ public class MainActivity extends AppCompatActivity implements ContratoAdapter.C
         contrato.setMonto(15000.00);
         contrato.setSaldo(8000.00);
         contrato.setMontoLiquidar(5000.00);
+        contrato.setNumeroCuenta("23298326768");
+        contrato.setOtrosCargos(0.00);
+        contrato.setCargoInteres(0.00);
+        contrato.setPagosAtrazados(0);
+        contrato.setPago("08/15");
+        contrato.setMontoPago(1000.00);
+        contrato.setOtrosCargos(100.00);
+        contrato.setMotivoOtrosCargos("Faltante pago anterior");
+        contrato.setCargoInteres(100.00);
+        contrato.setPagosAtrazados(1);
 
         daoSession.getContratoDao().insert(contrato);
 
@@ -415,13 +458,15 @@ public class MainActivity extends AppCompatActivity implements ContratoAdapter.C
                 pago.setMonto(Double.parseDouble(etMonto.getText().toString()));
                 Long id = pagoDao.insert(pago);
 
-                imprimeRecibo(pago);
+
+                //imprimeRecibo(pago);
 
                 Context context = getApplicationContext();
                 CharSequence text = "El pago ha sido registrado";
 
                 Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
                 toast.show();
+
             }
         });
 

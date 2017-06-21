@@ -13,8 +13,8 @@ import com.cobranza.model.Contrato;
 
 public class DetalleContratoPagerAdapter extends FragmentPagerAdapter
 {
-    final int PAGE_COUNT = 3;
-    private String tabtitles[] = new String[]{"Generales", "Contratos", "Referencias"};
+    final int PAGE_COUNT = 4;
+    private String tabtitles[] = new String[]{"Generales", "Pagos", "Contratos", "Referencias"};
 
     private Contrato contrato;
 
@@ -37,8 +37,11 @@ public class DetalleContratoPagerAdapter extends FragmentPagerAdapter
             case 0:
                 return ContratoGenerales.newInstance(contrato);
             case 1:
-                return ClienteContratos.newInstance(null, null);
+                contrato.resetPagos();
+                return ClientePagos.newInstance(contrato.getPagos());
             case 2:
+                return ClienteContratos.newInstance(contrato.getCliente().getContratos());
+            case 3:
                 return ClienteReferencias.newInstance(null, null);
 
         }

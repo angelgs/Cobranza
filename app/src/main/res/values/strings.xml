@@ -62,5 +62,23 @@
     <string name="strLang">en</string>
     <string name="camer">No pictures</string>
     <string name="msg_error">Input errors, please check!</string>
+    <string name="lblNumeroCuenta">No. Cuenta:</string>
+    <string name="lblNumeroContrato">No. Contrato:</string>
+    <string name="lblNombre">Cliente:</string>
+    <string name="lblDireccion">Domicilio:</string>
+    <string name="lblCargoInteres">Cargo por Interés:</string>
+    <string name="lblOtrosCargos">Otros Cargos:</string>
+    <string name="lblMotivoOtrosCargos">Motivo:</string>
+    <string name="lblSaldo">Saldo:</string>
+    <string name="lblAviso">Aviso:</string>
+    <string name="lblPagosAtrazados">Pagos Atrazados:</string>
+    <string name="lblTotal">Total:</string>
+    <string name="lblNoPago">No. Pago:</string>
+    <string name="lblMontoAbono">Abono:</string>
+    <string name="lblTelefono">Teléfono:</string>
+    <string name="lblFecha">Fecha:</string>
+    <string name="menu_pago_reimprimir">Reimprimir</string>
+    <string name="menu_pago_editar">Editar</string>
+    <string name="menu_pagos_cancelar">Cancelar</string>
 
 </resources>

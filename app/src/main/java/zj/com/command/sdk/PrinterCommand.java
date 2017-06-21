@@ -381,7 +381,7 @@ public class PrinterCommand
     /**
      * 选择字体大小(倍高倍宽)
      *
-     * @param size
+     * @param size1
      * @return
      */
     public static byte[] POS_Set_FontSize(int size1, int size2)

@@ -20,14 +20,17 @@ public class Telefono
     @NotNull
     private String alias;
 
+    @NotNull
     @Convert(converter = TipoTelefonoConverter.class, columnType = String.class)
     private TipoTelefono tipo;
 
     @NotNull
     private String numero;
 
-    @Generated(hash = 1893778106)
-    public Telefono(Long id, @NotNull String alias, TipoTelefono tipo, @NotNull String numero) {
+    @Generated(hash = 877998269)
+    public Telefono(Long id, @NotNull String alias, @NotNull TipoTelefono tipo,
+                    @NotNull String numero)
+    {
         this.id = id;
         this.alias = alias;
         this.tipo = tipo;
@@ -87,7 +90,7 @@ public class Telefono
                 return null;
             }
             for(TipoTelefono tipoTelefono : TipoTelefono.values()) {
-                if(tipoTelefono.tipo == databaseValue) {
+                if (tipoTelefono.tipo.compareTo(databaseValue) == 0) {
                     return tipoTelefono;
                 }
             }

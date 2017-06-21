@@ -46,6 +46,25 @@ public class Contrato
     @NotNull
     private String direccion;
 
+    @NotNull
+    private String numeroCuenta;
+
+    @NotNull
+    private String pago;
+
+    @NotNull
+    private double montoPago;
+
+    private int pagosAtrazados;
+
+    private double cargoInteres;
+
+    private double otrosCargos;
+
+    private String motivoOtrosCargos;
+
+    private String aviso;
+
     @ToMany
     @JoinEntity(
             entity = ContratoPersona.class,
@@ -71,9 +90,11 @@ public class Contrato
     @Generated(hash = 1668724671)
     private transient Long cliente__resolvedKey;
 
-    @Generated(hash = 26986732)
+    @Generated(hash = 2048565279)
     public Contrato(Long id, @NotNull String numero, Long clienteId, @NotNull Date fecha, double monto,
-                    double saldo, double montoLiquidar, @NotNull String direccion)
+                    double saldo, double montoLiquidar, @NotNull String direccion, @NotNull String numeroCuenta,
+                    @NotNull String pago, double montoPago, int pagosAtrazados, double cargoInteres,
+                    double otrosCargos, String motivoOtrosCargos, String aviso)
     {
         this.id = id;
         this.numero = numero;
@@ -83,6 +104,14 @@ public class Contrato
         this.saldo = saldo;
         this.montoLiquidar = montoLiquidar;
         this.direccion = direccion;
+        this.numeroCuenta = numeroCuenta;
+        this.pago = pago;
+        this.montoPago = montoPago;
+        this.pagosAtrazados = pagosAtrazados;
+        this.cargoInteres = cargoInteres;
+        this.otrosCargos = otrosCargos;
+        this.motivoOtrosCargos = motivoOtrosCargos;
+        this.aviso = aviso;
     }
 
     @Generated(hash = 1339756915)
@@ -311,6 +340,86 @@ public class Contrato
     public synchronized void resetReferencias()
     {
         referencias = null;
+    }
+
+    public String getNumeroCuenta()
+    {
+        return this.numeroCuenta;
+    }
+
+    public void setNumeroCuenta(String numeroCuenta)
+    {
+        this.numeroCuenta = numeroCuenta;
+    }
+
+    public int getPagosAtrazados()
+    {
+        return this.pagosAtrazados;
+    }
+
+    public void setPagosAtrazados(int pagosAtrazados)
+    {
+        this.pagosAtrazados = pagosAtrazados;
+    }
+
+    public double getCargoInteres()
+    {
+        return this.cargoInteres;
+    }
+
+    public void setCargoInteres(double cargoInteres)
+    {
+        this.cargoInteres = cargoInteres;
+    }
+
+    public double getOtrosCargos()
+    {
+        return this.otrosCargos;
+    }
+
+    public void setOtrosCargos(double otrosCargos)
+    {
+        this.otrosCargos = otrosCargos;
+    }
+
+    public String getMotivoOtrosCargos()
+    {
+        return this.motivoOtrosCargos;
+    }
+
+    public void setMotivoOtrosCargos(String motivoOtrosCargos)
+    {
+        this.motivoOtrosCargos = motivoOtrosCargos;
+    }
+
+    public String getAviso()
+    {
+        return this.aviso;
+    }
+
+    public void setAviso(String aviso)
+    {
+        this.aviso = aviso;
+    }
+
+    public String getPago()
+    {
+        return this.pago;
+    }
+
+    public void setPago(String pago)
+    {
+        this.pago = pago;
+    }
+
+    public double getMontoPago()
+    {
+        return this.montoPago;
+    }
+
+    public void setMontoPago(double montoPago)
+    {
+        this.montoPago = montoPago;
     }
 
     /** called by internal mechanisms, do not call yourself. */

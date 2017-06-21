@@ -3,68 +3,408 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/cardview_light_background"
     android:scrollbars="vertical"
     tools:context="com.cobranza.adapters.ContratoGenerales">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/rect"
-        android:elevation="2dp"
-        android:orientation="vertical"
-        android:paddingRight="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
 
-
-        <TextView
-            android:id="@+id/nombre"
+        <LinearLayout
+            android:id="@+id/row1"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerVertical="true"
-            android:maxLines="2"
-            android:padding="4dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="#444"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/lblNumeroCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="@string/lblNumeroCuenta"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/direccion"
+            <TextView
+                android:id="@+id/numeroCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row2"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/nombre"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:maxLines="6"
-            android:padding="4dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#444"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
+            android:layout_below="@+id/row1"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
 
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/lblNumeroContrato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblNumeroContrato"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/contrato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="12sp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row3"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row2"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="@string/lblNombre"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row4"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row3"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="@string/lblDireccion"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/direccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="6"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row5"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row4"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="@string/lblTelefono"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/telefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyAbono"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row5"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblNoPago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblNoPago"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/noPago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="6"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lblMontoAbono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/lblMontoAbono"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/montoAbono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row7"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lyAbono"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblTotal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyPagosAtrazados"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row7"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblPagosAtrazados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblPagosAtrazados"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/pagosAtrazados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyCargoInteres"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lyPagosAtrazados"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblCargoInteres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblCargoInteres"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/cargoInteres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyOtrosCargos"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lyCargoInteres"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblOtrosCargos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblOtrosCargos"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/otrosCargos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="6"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/lblmMtivoOtrosCargos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/lblMotivoOtrosCargos"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/motivoOtrosCargos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row11"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lyOtrosCargos"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblSaldo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblSaldo"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/saldo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row12"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row11"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblAviso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblAviso"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/aviso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:paddingLeft="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
-    <!--
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 xmlns:tools="http://schemas.android.com/tools"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 tools:context="com.cobranza.adapters.ContratoGenerales">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"/>
-
-
-    </FrameLayout>
-    -->
